@@ -26,7 +26,7 @@ require (
 	gopkg.in/fsnotify.v1 v1.4.7
 	gopkg.in/mxpv/patreon-go.v1 v1.0.0-20171031001022-1d2f253ac700
 	gorm.io/driver/postgres v1.6.0
-	gorm.io/gorm v1.31.1
+	gorm.io/gorm v1.31.2
 	k8s.io/apimachinery v0.35.0
 	k8s.io/client-go v0.35.0
 	tailscale.com v1.94.0
