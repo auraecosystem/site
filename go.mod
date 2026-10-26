@@ -25,8 +25,8 @@ require (
 	google.golang.org/protobuf v1.36.12-0.20260120151049-f2248ac996af
 	gopkg.in/fsnotify.v1 v1.4.7
 	gopkg.in/mxpv/patreon-go.v1 v1.0.0-20171031001022-1d2f253ac700
-	gorm.io/driver/postgres v1.6.0
-	gorm.io/gorm v1.31.1
+	gorm.io/driver/postgres v1.6.3
+	gorm.io/gorm v1.31.2
 	k8s.io/apimachinery v0.37.1
 	k8s.io/client-go v0.35.0
 	tailscale.com v1.94.0
