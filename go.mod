@@ -21,14 +21,14 @@ require (
 	github.com/prometheus/client_golang v1.23.2
 	github.com/stretchr/testify v1.12.1
 	github.com/twitchtv/twirp v8.1.3+incompatible
-	golang.org/x/oauth2 v0.34.0
+	golang.org/x/oauth2 v0.36.0
 	google.golang.org/protobuf v1.37.0-rc.1
 	gopkg.in/fsnotify.v1 v1.4.7
 	gopkg.in/mxpv/patreon-go.v1 v1.0.0-20171031001022-1d2f253ac700
 	gorm.io/driver/postgres v1.6.3
 	gorm.io/gorm v1.31.2
 	k8s.io/apimachinery v0.37.1
-	k8s.io/client-go v0.35.0
+	k8s.io/client-go v0.37.1
 	tailscale.com v1.94.0
 	within.website/x v1.31.0
 )
@@ -180,7 +180,7 @@ require (
 	gopkg.in/warnings.v0 v0.1.2 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 	honnef.co/go/tools v0.7.0-0.dev.0.20251022135355-8273271481d0 // indirect
-	k8s.io/api v0.35.0 // indirect
+	k8s.io/api v0.37.1 // indirect
 	k8s.io/klog/v2 v2.140.0 // indirect
 	k8s.io/kube-openapi v0.0.0-20260721132016-d427ff9ee9ad // indirect
 	k8s.io/utils v0.0.0-20260626114624-be93311217bd // indirect
