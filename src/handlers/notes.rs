@@ -1,4 +1,7 @@
-use std::{net::SocketAddr, sync::Arc};
+use std::{
+    net::{IpAddr, SocketAddr},
+    sync::Arc,
+};
 
 use crate::{app::State, templates};
 use axum::{
@@ -43,6 +46,15 @@ impl Default for Note {
             reply_to: None,
         }
     }
+}
+
+fn tailscale_client_addr(headers: &HeaderMap) -> Result<SocketAddr, Error> {
+    let value = headers
+        .get("X-Real-Ip")
+        .ok_or_else(|| Error::Catchall("Cannot get X-Real-Ip header".into()))?;
+
+    let ip: IpAddr = value.to_str()?.parse()?;
+    Ok(SocketAddr::new(ip, 0))
 }
 
 impl Note {
@@ -239,13 +251,7 @@ pub async fn delete(
 ) -> super::Result<String> {
     let conn = state.pool.get().await?;
 
-    let ip = headers.get("X-Real-Ip").clone();
-
-    if ip.is_none() {
-        return Err(Error::Catchall("Cannot get X-Real-Ip header".into()));
-    }
-
-    let ip: SocketAddr = (ip.unwrap().to_str()?.to_owned() + ":0").parse()?;
+    let ip = tailscale_client_addr(&headers)?;
     let whois = ts_localapi::whois(ip).await?;
 
     if whois.user_profile.login_name != "Xe@github" {
@@ -272,13 +278,7 @@ pub async fn update(
 ) -> super::Result<Json<Note>> {
     let conn = state.pool.get().await?;
 
-    let ip = headers.get("X-Real-Ip").clone();
-
-    if ip.is_none() {
-        return Err(Error::Catchall("Cannot get X-Real-Ip header".into()));
-    }
-
-    let ip: SocketAddr = (ip.unwrap().to_str()?.to_owned() + ":0").parse()?;
+    let ip = tailscale_client_addr(&headers)?;
     let whois = ts_localapi::whois(ip).await?;
 
     if whois.user_profile.login_name != "Xe@github" {
@@ -333,7 +333,7 @@ pub async fn update(
         ],
     )?;
 
-    note.id = conn.last_insert_rowid() as u64;
+    note.id = old_note.id;
 
     Ok(Json(note))
 }
@@ -346,13 +346,7 @@ pub async fn create(
 ) -> super::Result<Json<Note>> {
     let conn = state.pool.get().await?;
 
-    let ip = headers.get("X-Real-Ip").clone();
-
-    if ip.is_none() {
-        return Err(Error::Catchall("Cannot get X-Real-Ip header".into()));
-    }
-
-    let ip: SocketAddr = (ip.unwrap().to_str()?.to_owned() + ":0").parse()?;
+    let ip = tailscale_client_addr(&headers)?;
     let whois = ts_localapi::whois(ip).await?;
 
     if whois.user_profile.login_name != "Xe@github" {
