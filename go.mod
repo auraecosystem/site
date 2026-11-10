@@ -4,7 +4,7 @@ go 1.27.3
 
 require (
 	github.com/a-h/templ v0.3.1100
-	github.com/aws/aws-sdk-go-v2 v1.47.7
+	github.com/aws/aws-sdk-go-v2 v1.47.8
 	github.com/aws/aws-sdk-go-v2/config v1.33.15
 	github.com/aws/aws-sdk-go-v2/service/s3 v1.114.8
 	github.com/bep/debounce v1.2.1
